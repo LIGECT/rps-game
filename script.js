@@ -1,55 +1,57 @@
 let humanScore = 0;
 let computerScore = 0;
-let choice1 = "Камень";
-let choice2 = "Ножницы";
-let choice3 = "Бумага";
 
 function getComputerChoice() {
   let random = Math.floor(Math.random() * 3);
-
-  if (random === 0) {
-    return choice1;
-  } else if (random === 1) {
-    return choice2;
-  } else {
-    return choice3;
-  }
+  return random;
 }
 
 function getHumanChoice() {
-  let choice = prompt("Ведите ваш выбор: Камень, Ножницы или Бумага").trim();
-  return choice;
+  let choice = prompt("Введите ваш выбор: Камень, Ножницы или Бумага").trim();
+
+  if (choice === "Камень") return 0;
+  if (choice === "Ножницы") return 1;
+  if (choice === "Бумага") return 2;
 }
 
-function playRound(humanChoiсe, computerChoiсe) {
-  //code
-  humanChoiсe =
-    humanChoiсe.at(0).toUpperCase() + humanChoiсe.slice(1).toLowerCase();
+function compareByCycle(a, b) {
+  if (a === b) return 0;
 
-  computerChoiсe =
-    computerChoiсe.at(0).toUpperCase() + computerChoiсe.slice(1).toLowerCase();
-
-  if (humanChoiсe === computerChoiсe) {
-    console.log("Ничья");
-    console.log("Счет: " + humanScore + " - " + computerScore);
-  } else if (humanChoiсe === "Камень" && computerChoiсe === "Ножницы") {
-    humanScore++;
-    console.log("Ты выиграл!");
-    console.log("Счет: " + humanScore + " - " + computerScore);
-  } else if (humanChoiсe === "Ножницы" && computerChoiсe === "Бумага") {
-    humanScore++;
-    console.log("Ты выиграл!");
-    console.log("Счет: " + humanScore + " - " + computerScore);
-  } else if (humanChoiсe === "Бумага" && computerChoiсe === "Камень") {
-    humanScore++;
-    console.log("Ты выиграл!");
-    console.log("Счет: " + humanScore + " - " + computerScore);
+  if ((a === 0 && b === 1) || (a === 1 && b === 2) || (a === 2 && b === 0)) {
+    return 1;
   } else {
-    computerScore++;
-    console.log("Компьютер выиграл");
-    console.log("Счет: " + humanScore + " - " + computerScore);
+    return -1;
   }
 }
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-playRound(humanSelection, computerSelection);
+
+function playRound(humanChoice, computerChoice) {
+  const result = compareByCycle(humanChoice, computerChoice);
+
+  if (result === 1) {
+    humanScore++;
+    console.log("Ты победил!");
+  } else if (result === -1) {
+    computerScore++;
+    console.log("Компьютер победил");
+  } else {
+    console.log("Ничья");
+  }
+
+  console.log(`Счет: Ты ${humanScore}, Компьютер ${computerScore}`);
+}
+
+function playGame() {
+  for (let i = 0; i < 5; i++) {
+    console.log(`Раунд ${i + 1}`);
+
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+
+    playRound(humanChoice, computerChoice);
+  }
+  console.log(
+    `Конечный результат: Ты ${humanScore}, Компьютер ${computerScore}`
+  );
+}
+
+playGame();
