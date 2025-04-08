@@ -7,20 +7,19 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Добро пожаловать!</h1>
-    <p>
-      Игра работает в консоли браузера. Откройте DevTools (F12) и перейдите на
-      вкладку Console.
-    </p>
-    <div id="choiceMenu">
-      <button id="rock">Камень</button>
-      <button id="scissors">Ножницы</button>
-      <button id="paper">Бумага</button>
-    </div>
-
-    <div id="gameScore"></div>
-    <div id="roundResult"></div>
-
+    <main class="container">
+      <h1 class="title">Добро пожаловать!</h1>
+      <p class="subtitle">
+        Выберите Камень, Ножницы или Бумагу и начните игру!
+      </p>
+      <div id="choiceMenu" class="button-group">
+        <button id="rock" class="btn">Камень</button>
+        <button id="scissors" class="btn">Ножницы</button>
+        <button id="paper" class="btn">Бумага</button>
+      </div>
+      <div id="gameScore" class="score"></div>
+      <div id="roundResult" class="result"></div>
+    </main>
     <script src="./script.js"></script>
   </body>
 </html>

@@ -69,13 +69,13 @@ menu.addEventListener("click", (event) => {
 function updateScore() {
   if (humanScore === 5) {
     roundResult.textContent = "Ты победил! Поздравляю, чемпион!";
-    roundResult.style.color = "green";
+    roundResult.style.color = "#28a745";
     gameScore.textContent = "Игра окончена";
     gameOver = true;
     addResetButton();
   } else if (computerScore === 5) {
     roundResult.textContent = "Компьютер победил! Ты проиграл, лузер!";
-    roundResult.style.color = "red";
+    roundResult.style.color = "#dc3545";
     gameScore.textContent = "Игра окончена";
     gameOver = true;
     addResetButton();
@@ -85,12 +85,13 @@ function updateScore() {
 function addResetButton() {
   let buttonReset = document.createElement("button");
   buttonReset.textContent = "Новая игра";
+  buttonReset.classList.add("reset-btn");
   buttonReset.addEventListener("click", () => {
     humanScore = 0;
     computerScore = 0;
     gameOver = false;
     roundResult.textContent = "";
-    roundResult.style.color = "black";
+    roundResult.style.color = "#333";
     gameScore.textContent = "Счет: Ты 0, Компьютер 0";
     buttonReset.remove();
   });
