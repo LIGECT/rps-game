@@ -1,5 +1,6 @@
 let humanScore = 0;
 let computerScore = 0;
+let gameOver = false;
 
 let roundResult = document.querySelector("#roundResult");
 let gameScore = document.querySelector("#gameScore");
@@ -8,14 +9,6 @@ function getComputerChoice() {
   let random = Math.floor(Math.random() * 3);
   return random;
 }
-
-// function getHumanChoice() {
-//   let choice = prompt("Введите ваш выбор: Камень, Ножницы или Бумага").trim();
-
-//   if (choice === "Камень") return 0;
-//   if (choice === "Ножницы") return 1;
-//   if (choice === "Бумага") return 2;
-// }
 
 function compareByCycle(a, b) {
   if (a === b) return 0;
@@ -28,38 +21,31 @@ function compareByCycle(a, b) {
 }
 
 function playRound(humanChoice, computerChoice) {
-  const result = compareByCycle(humanChoice, computerChoice);
+  const choice = ["Камень", "Ножницы", "Бумага"];
+  const humanText = choice[humanChoice];
+  const computerText = choice[computerChoice];
 
+  const result = compareByCycle(humanChoice, computerChoice);
   if (result === 1) {
     humanScore++;
-    roundResult.textContent = "Этот раунд выиграл: ты";
+    roundResult.textContent = `👱: ${humanText}, 
+                              🖥️: ${computerText}. 
+                              Этот раунд выиграл: ты`;
   } else if (result === -1) {
     computerScore++;
-    roundResult.textContent = "Этот раунд выиграл: компьютер";
+    roundResult.textContent = `👱: ${humanText}, 
+                              🖥️: ${computerText}. 
+                              Этот раунд выиграл: компьютер`;
   } else {
-    roundResult.textContent = "Ничья";
+    roundResult.textContent = `👱: ${humanText},
+                               🖥️: ${computerText}.
+                                Ничья`;
   }
 
-  gameScore.textContent = `Счет: Ты ${humanScore}, Компьютер ${computerScore}`;
-
+  gameScore.textContent = `Счет: Ты ${humanScore}, 
+                          Компьютер ${computerScore}`;
   updateScore();
 }
-
-// function playGame() {
-//   for (let i = 0; i < 5; i++) {
-//     console.log(`Раунд ${i + 1}`);
-
-//     const humanChoice = getHumanChoice();
-//     const computerChoice = getComputerChoice();
-
-//     playRound(humanChoice, computerChoice);
-//   }
-//   console.log(
-//     `Конечный результат: Ты ${humanScore}, Компьютер ${computerScore}`
-//   );
-// }
-
-// playGame();
 
 let menu = document.querySelector("#choiceMenu");
 
@@ -82,12 +68,31 @@ menu.addEventListener("click", (event) => {
 
 function updateScore() {
   if (humanScore === 5) {
-    roundResult.textContent = "Ты победил!";
+    roundResult.textContent = "Ты победил! Поздравляю, чемпион!";
+    roundResult.style.color = "green";
+    gameScore.textContent = "Игра окончена";
     gameOver = true;
+    addResetButton();
   } else if (computerScore === 5) {
-    roundResult.textContent = "Компьютер победил";
+    roundResult.textContent = "Компьютер победил! Ты проиграл, лузер!";
+    roundResult.style.color = "red";
+    gameScore.textContent = "Игра окончена";
     gameOver = true;
+    addResetButton();
   }
 }
 
-let gameOver = false;
+function addResetButton() {
+  let buttonReset = document.createElement("button");
+  buttonReset.textContent = "Новая игра";
+  buttonReset.addEventListener("click", () => {
+    humanScore = 0;
+    computerScore = 0;
+    gameOver = false;
+    roundResult.textContent = "";
+    roundResult.style.color = "black";
+    gameScore.textContent = "Счет: Ты 0, Компьютер 0";
+    buttonReset.remove();
+  });
+  document.body.appendChild(buttonReset);
+}
