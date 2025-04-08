@@ -1,6 +1,8 @@
 let humanScore = 0;
 let computerScore = 0;
 
+let gameScore = document.querySelector("#gameScore");
+
 function getComputerChoice() {
   let random = Math.floor(Math.random() * 3);
   return random;
@@ -29,15 +31,15 @@ function playRound(humanChoice, computerChoice) {
 
   if (result === 1) {
     humanScore++;
-    console.log("Ты победил!");
+    gameScore.textContent = "Ты победил!";
   } else if (result === -1) {
     computerScore++;
-    console.log("Компьютер победил");
+    gameScore.textContent = "Компьютер победил";
   } else {
-    console.log("Ничья");
+    gameScore.textContent = "Ничья";
   }
 
-  console.log(`Счет: Ты ${humanScore}, Компьютер ${computerScore}`);
+  gameScore.textContent = `Счет: Ты ${humanScore}, Компьютер ${computerScore}`;
 }
 
 // function playGame() {
