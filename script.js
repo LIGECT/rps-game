@@ -6,13 +6,13 @@ function getComputerChoice() {
   return random;
 }
 
-function getHumanChoice() {
-  let choice = prompt("Введите ваш выбор: Камень, Ножницы или Бумага").trim();
+// function getHumanChoice() {
+//   let choice = prompt("Введите ваш выбор: Камень, Ножницы или Бумага").trim();
 
-  if (choice === "Камень") return 0;
-  if (choice === "Ножницы") return 1;
-  if (choice === "Бумага") return 2;
-}
+//   if (choice === "Камень") return 0;
+//   if (choice === "Ножницы") return 1;
+//   if (choice === "Бумага") return 2;
+// }
 
 function compareByCycle(a, b) {
   if (a === b) return 0;
@@ -55,3 +55,21 @@ function playRound(humanChoice, computerChoice) {
 // }
 
 // playGame();
+
+let menu = document.querySelector("#choiceMenu");
+
+menu.addEventListener("click", (event) => {
+  let target = event.target;
+
+  switch (target.id) {
+    case "rock":
+      playRound(0, getComputerChoice());
+      break;
+    case "paper":
+      playRound(2, getComputerChoice());
+      break;
+    case "scissors":
+      playRound(1, getComputerChoice());
+      break;
+  }
+});
