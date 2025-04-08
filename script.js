@@ -1,6 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
 
+let roundResult = document.querySelector("#roundResult");
 let gameScore = document.querySelector("#gameScore");
 
 function getComputerChoice() {
@@ -31,15 +32,17 @@ function playRound(humanChoice, computerChoice) {
 
   if (result === 1) {
     humanScore++;
-    gameScore.textContent = "Ты победил!";
+    roundResult.textContent = "Этот раунд выиграл: ты";
   } else if (result === -1) {
     computerScore++;
-    gameScore.textContent = "Компьютер победил";
+    roundResult.textContent = "Этот раунд выиграл: компьютер";
   } else {
-    gameScore.textContent = "Ничья";
+    roundResult.textContent = "Ничья";
   }
 
   gameScore.textContent = `Счет: Ты ${humanScore}, Компьютер ${computerScore}`;
+
+  updateScore();
 }
 
 // function playGame() {
@@ -61,8 +64,9 @@ function playRound(humanChoice, computerChoice) {
 let menu = document.querySelector("#choiceMenu");
 
 menu.addEventListener("click", (event) => {
-  let target = event.target;
+  if (gameOver) return;
 
+  let target = event.target;
   switch (target.id) {
     case "rock":
       playRound(0, getComputerChoice());
@@ -75,3 +79,15 @@ menu.addEventListener("click", (event) => {
       break;
   }
 });
+
+function updateScore() {
+  if (humanScore === 5) {
+    roundResult.textContent = "Ты победил!";
+    gameOver = true;
+  } else if (computerScore === 5) {
+    roundResult.textContent = "Компьютер победил";
+    gameOver = true;
+  }
+}
+
+let gameOver = false;
