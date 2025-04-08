@@ -40,18 +40,18 @@ function playRound(humanChoice, computerChoice) {
   console.log(`Счет: Ты ${humanScore}, Компьютер ${computerScore}`);
 }
 
-function playGame() {
-  for (let i = 0; i < 5; i++) {
-    console.log(`Раунд ${i + 1}`);
+// function playGame() {
+//   for (let i = 0; i < 5; i++) {
+//     console.log(`Раунд ${i + 1}`);
 
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
+//     const humanChoice = getHumanChoice();
+//     const computerChoice = getComputerChoice();
 
-    playRound(humanChoice, computerChoice);
-  }
-  console.log(
-    `Конечный результат: Ты ${humanScore}, Компьютер ${computerScore}`
-  );
-}
+//     playRound(humanChoice, computerChoice);
+//   }
+//   console.log(
+//     `Конечный результат: Ты ${humanScore}, Компьютер ${computerScore}`
+//   );
+// }
 
-playGame();
+// playGame();
